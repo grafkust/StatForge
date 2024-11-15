@@ -1,0 +1,26 @@
+
+server:
+  port: ${PORT}
+
+spring:
+
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:3306/${DB_SCHEMA}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.yaml
+    default-schema: ${DB_SCHEMA}
+    enabled: true
+    drop-first: false

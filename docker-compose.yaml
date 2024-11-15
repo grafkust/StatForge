@@ -1,0 +1,23 @@
+networks:
+  app-network:
+    driver: bridge
+
+services:
+
+  mySQL:
+    image: mysql:9.0.0
+    container_name: mysql
+    restart: no
+    networks:
+      - app-network
+    env_file:
+      - .env
+    ports:
+      - '3306:3306'
+    volumes:
+      - './src/main/resources/db-init:/docker-entrypoint-initdb.d'
+      - 'crime-db:/var/lib/mysql'
+
+volumes:
+  crime-db:
+    name: crime-db
